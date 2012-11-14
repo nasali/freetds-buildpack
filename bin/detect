@@ -2,7 +2,7 @@
 
 # this pack is valid for apps with a .odbc.ini in the root
 if [ -f $1/.odbc.ini ]; then
-  echo "ODBC"
+  echo "FreeTDS ODBC"
   exit 0
 else
   echo "no"
