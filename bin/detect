@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# this pack is valid for apps with a .odbc.ini in the root
+if [ -f $1/.odbc.ini ]; then
+  echo "ODBC"
+  exit 0
+else
+  echo "no"
+  exit 1
+fi
