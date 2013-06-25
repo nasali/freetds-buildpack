@@ -6,6 +6,6 @@ config_vars:
   LIBRARY_PATH: vendor/freetds/lib
   CPPATH: vendor/freetds/include
   CPATH: vendor/freetds/include
-  FREETDS-DIR: vendor/freetds
+  freetds-dir: vendor/freetds
 CONF
 
