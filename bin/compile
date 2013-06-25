@@ -9,8 +9,3 @@ puts "      Installing freetds into #{DIR}"
 puts `mkdir -p #{DIR}`
 puts `curl https://s3.amazonaws.com/firmhouse/freetds-0.tgz -o - | tar -xz -C #{DIR} -f -`
 
-ENV['LD_LIBRARY_PATH'] = "#{DIR}/lib:$LIBRARY_PATH"
-ENV['LIBRARY_PATH'] = "#{DIR}/lib:$LIBRARY_PATH"
-ENV['CPPATH'] = "#{DIR}/include:$CPPATH"
-ENV['CPATH'] = "#{DIR}/include:$CPATH"
-ENV['freetds-dir'] = DIR
