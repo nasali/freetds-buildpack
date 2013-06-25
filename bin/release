@@ -1,14 +1,11 @@
 #!/usr/bin/env ruby
 
-
-#ENV['LD_LIBRARY_PATH'] = "#{DIR}/lib:$LIBRARY_PATH"
-#ENV['LIBRARY_PATH'] = "#{DIR}/lib:$LIBRARY_PATH"
-#ENV['CPPATH'] = "#{DIR}/include:$CPPATH"
-#ENV['CPATH'] = "#{DIR}/include:$CPATH"
-#ENV['freetds-dir'] = DIR
-
 puts <<-CONF
 config_vars:
   LD_LIBRARY_PATH: vendor/freetds/lib
+  LIBRARY_PATH: vendor/freetds/lib
+  CPPATH: vendor/freetds/include
+  CPATH: vendor/freetds/include
+  FREETDS-DIR: vendor/freetds
 CONF
 
