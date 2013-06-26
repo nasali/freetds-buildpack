@@ -4,5 +4,5 @@ puts <<-CONF
 config_vars:
   PATH: vendor/freetds/bin
   LD_LIBRARY_PATH: vendor/freetds/lib
-  FREETDS_DIR: #{ARGV[0]}/vendor/freetds
+  FREETDS_DIR: vendor/freetds
 CONF
