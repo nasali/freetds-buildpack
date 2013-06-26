@@ -28,7 +28,7 @@ if $?.success?
   if $?.success?
     indent "Done."
   else
-    raise "Failed to install #{result}"
+    raise "Failed to install #{$?}"
   end
 else
   raise "ERROR! #{$?}"
