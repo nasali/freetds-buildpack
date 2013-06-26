@@ -21,17 +21,11 @@ indent "Downloading and extracting archive from #{S3BUCKET}..."
 result = `curl #{FREETDS_TGZ} -o - | tar -xz -C #{FREETDS_DIR} -f - `
 
 if $?.success?  
-  indent "Installing TinyTDS gem..."
-  ENV['freetds-dir']=FREETDS_DIR
-  result = `gem install tiny_tds --install-dir #{VENDOR_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
+  indent "Done."
   
-  if $?.success?
-    puts RbConfig::CONFIG['libdir']
-    puts RbConfig::CONFIG['includedir']
-    indent "Done."
-  else
-    raise "Failed to install #{$?}"
-  end
+  #indent "Installing TinyTDS gem..."
+  #ENV['freetds-dir']=FREETDS_DIR
+  #result = `gem install tiny_tds --install-dir #{VENDOR_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
 else
   raise "ERROR! #{$?}"
 end
