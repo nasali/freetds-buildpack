@@ -22,15 +22,15 @@ indent "Downloading and extracting archive from #{S3BUCKET}..."
 result = `curl #{FREETDS_TGZ} -o - | tar -xz -C #{FREETDS_DIR} -f - `
 
 if $?.success?  
-  indent "Installing TinyTDS gem..."
-  result = `gem install tiny_tds  -v 0.5.1 -i #{TINYTDS_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
-  if $?.success?
-    result = `cd #{TINYTDS_DIR} && gem unpack tiny_tds`
-    puts `ls -alh #{TINYTDS_DIR}/`
+  #indent "Installing TinyTDS gem..."
+  #result = `gem install tiny_tds  -v 0.5.1 -i #{TINYTDS_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
+  #if $?.success?
+  #  result = `cd #{TINYTDS_DIR} && gem unpack tiny_tds`
+  #  puts `ls -alh #{TINYTDS_DIR}/`
     indent "Done."
-  else
-    raise "ERROR! #{$?}"
-  end
+  #else
+  #  raise "ERROR! #{$?}"
+  #end
 else
   raise "ERROR! #{$?}"
 end
