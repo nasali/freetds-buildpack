@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+require 'mkmf'
 puts "-----> Found a .freetds.conf"
 
 # sync output
