@@ -25,6 +25,7 @@ if $?.success?
   indent "Installing TinyTDS gem..."
   result = `mkdir #{TINYTDS_DIR} && gem install tiny_tds --install-dir #{TINYTDS_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
   if $?.success?
+    puts `ls -alh #{TINYTDS_DIR}`
     indent "Done."
   else
     raise "ERROR! #{$?}"
