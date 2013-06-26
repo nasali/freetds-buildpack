@@ -9,7 +9,7 @@ S3BUCKET="https://s3.amazonaws.com/chameleon-heroku-assets"
 FREETDS_TGZ="#{S3BUCKET}/freetds.tar.gz"
 VENDOR_DIR="#{ARGV[0]}/vendor"
 FREETDS_DIR="#{VENDOR_DIR}/freetds"
-TINYTDS_DIR="#{VENDOR_DIR}/tinytds"
+TINYTDS_DIR="#{VENDOR_DIR}/bundle"
 
 def indent msg 
   puts "       #{msg}"
