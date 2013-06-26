@@ -23,7 +23,7 @@ result = `curl #{FREETDS_TGZ} -o - | tar -xz -C #{FREETDS_DIR} -f - `
 
 if $?.success?  
   indent "Installing TinyTDS gem..."
-  result = `mkdir #{TINYTDS_DIR} && gem install tiny_tds  -v 0.5.1 -i #{TINYTDS_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
+  result = `gem install tiny_tds  -v 0.5.1 -i #{VENDOR_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
   if $?.success?
     result = `cd #{VENDOR_DIR} && gem unpack tiny_tds`
     puts `ls -alh #{VENDOR_DIR}/`
