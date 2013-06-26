@@ -9,6 +9,7 @@ S3BUCKET="https://s3.amazonaws.com/chameleon-heroku-assets"
 FREETDS_TGZ="#{S3BUCKET}/freetds.tar.gz"
 VENDOR_DIR="#{ARGV[0]}/vendor"
 FREETDS_DIR="#{VENDOR_DIR}/freetds"
+TINYTDS_DIR="#{VENDOR_DIR}/tinytds"
 
 def indent msg 
   puts "       #{msg}"
@@ -21,11 +22,14 @@ indent "Downloading and extracting archive from #{S3BUCKET}..."
 result = `curl #{FREETDS_TGZ} -o - | tar -xz -C #{FREETDS_DIR} -f - `
 
 if $?.success?  
-  indent "Done."
-  
-  #indent "Installing TinyTDS gem..."
+  indent "Installing TinyTDS gem..."
   #ENV['freetds-dir']=FREETDS_DIR
-  #result = `gem install tiny_tds --install-dir #{VENDOR_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
+  result = `gem install tiny_tds --install-dir #{TINYTDS_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
+  if $?.success?
+    indent "Done."
+  else
+    raise "ERROR! #{$?}"
+  end
 else
   raise "ERROR! #{$?}"
 end
