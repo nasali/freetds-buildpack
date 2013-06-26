@@ -26,7 +26,7 @@ if $?.success?
   result = `gem install tiny_tds --install-dir #{VENDOR_DIR} -- --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
   
   if $?.success?
-    `ls -alh #{VENDOR_DIR}`
+    puts `ls -alh #{VENDOR_DIR}`
     indent "Done."
   else
     raise "Failed to install #{$?}"
