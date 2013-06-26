@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
 
-puts "-----> Found a .freetds.ini"
+puts "-----> Found a .freetds.conf"
 
 # sync output
 $stdout.sync = true
 
 S3BUCKET="https://s3.amazonaws.com/chameleon-heroku-assets"
 FREETDS_TGZ="#{S3BUCKET}/freetds.tar.gz"
-FREETDS_DIR="#{ARGV[0]}/vendor/freetds"
+VENDOR_DIR="#{ARGV[0]}/vendor"
+FREETDS_DIR="#{VENDOR_DIR}/freetds"
 
 def indent msg 
   puts "       #{msg}"
@@ -19,8 +20,15 @@ resuult = `mkdir #{FREETDS_DIR}`
 indent "Downloading and extracting archive from #{S3BUCKET}..."
 result = `curl #{FREETDS_TGZ} -o - | tar -xz -C #{FREETDS_DIR} -f - `
 
-if $?.success?
-  puts "=====> Done."
+if $?.success?  
+  indent "Installing TinyTDS gem..."
+  result = `gem install tiny_tds --install-dir #{VENDOR_DIR} --with-freetds-include=#{FREETDS_DIR}/include --with-freetds-lib=#{FREETDS_DIR}/lib `
+  
+  if $?.success?
+    indent "Done."
+  else
+    raise "Failed to install #{result}"
+  end
 else
   raise "ERROR! #{$?}"
 end
