@@ -1,11 +1,26 @@
 #!/usr/bin/env ruby
 
+puts "-----> Found a .freetds.ini"
+
 # sync output
 $stdout.sync = true
 
-DIR="#{ARGV[0]}/vendor/freetds"
+S3BUCKET="https://s3.amazonaws.com/chameleon-heroku-assets"
+FREETDS_TGZ="#{S3BUCKET}/freetds.tar.gz"
+FREETDS_DIR="#{ARGV[0]}/vendor/freetds"
 
-puts "      Installing freetds into #{DIR}"
-puts `mkdir -p #{DIR}`
-puts `curl https://s3.amazonaws.com/firmhouse/freetds-0.tgz -o - | tar -xz -C #{DIR} -f -`
+def indent msg 
+  puts "       #{msg}"
+end
 
+indent "Creating folder"
+resuult = `mkdir #{FREETDS_DIR}`
+
+indent "Downloading and extracting archive from #{S3BUCKET}..."
+result = `curl #{FREETDS_TGZ} -o - | tar -xz -C #{FREETDS_DIR} -f - `
+
+if $?.success?
+  puts "=====> Done."
+else
+  raise "ERROR! #{$?}"
+end
