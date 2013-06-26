@@ -4,7 +4,5 @@ puts <<-CONF
 config_vars:
   PATH: vendor/freetds/bin
   LD_LIBRARY_PATH: vendor/freetds/lib
-  LIBRARY_PATH: vendor/freetds/lib
-  LIBDIR: vendor/freetds/lib
-  INCLUDEDIR: vendor/freetds/include
+  FREETDS_DIR: vendor/freetds
 CONF
