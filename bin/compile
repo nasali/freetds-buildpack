@@ -16,10 +16,10 @@ def indent msg
 end
 
 indent "Creating folder"
-resuult = `mkdir #{FREETDS_DIR}`
+result = `mkdir #{FREETDS_DIR}`
 
 indent "Downloading and extracting archive from #{S3BUCKET}..."
-result = `curl #{FREETDS_TGZ} -o - | tar -xz -C #{FREETDS_DIR} -f - `
+result = `curl #{FREETDS_TGZ} -s -o - | tar -xz -C #{FREETDS_DIR} -f - `
 
 if $?.success?
   indent "Done."
