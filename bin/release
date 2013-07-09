@@ -2,9 +2,24 @@
 
 VENDOR_DIR="#{ARGV[0]}/vendor" #The FREETDS_DIR needs to be absolute is why
 
+EXISTING_LD_LIBRARY_PATH = ENV['LD_LIBRARY_PATH']
+new_ld_library_path = "vendor/freetds/lib"
+
+if ! EXISTING_LD_LIBRARY_PATH.nil? && ! EXISTING_LD_LIBRARY_PATH.empty?
+  new_ld_library_path = EXISTING_LD_LIBRARY_PATH + ":" + new_ld_library_path
+end
+
+EXISTING_PATH = ENV['PATH']
+new_path = "vendor/freetds/bin"
+
+if ! EXISTING_PATH.nil? && ! EXISTING_PATH.empty?
+  new_path = EXISTING_PATH + ":" + new_path
+end
+
+
 puts <<-CONF
 config_vars:
-  PATH: "#{ENV['PATH']}:vendor/freetds/bin"
-  LD_LIBRARY_PATH: "#{ENV['LD_LIBRARY_PATH']}:vendor/freetds/lib"
+  PATH: #{new_path}
+  LD_LIBRARY_PATH: #{new_ld_library_path}
   FREETDS_DIR: #{VENDOR_DIR}/freetds
 CONF
