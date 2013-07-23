@@ -6,28 +6,35 @@ puts "-----> Found a .freetds.conf"
 $stdout.sync = true
 
 S3BUCKET="https://s3.amazonaws.com/chameleon-heroku-assets"
-FREETDS_TGZ="#{S3BUCKET}/freetds-openssl.tar.gz"
-OPENSSL_TGZ="#{S3BUCKET}/openssl-1.0.1e.tar.gz"
+FREE_TDS_TGZ="#{S3BUCKET}/freetds-openssl.tar.gz"
+OPEN_SSL_TGZ="#{S3BUCKET}/openssl-1.0.1e.tar.gz"
+UNIX_ODBC_TGZ="#{S3BUCKET}/unixodbc.tar.gz"
+
 VENDOR_DIR="#{ARGV[0]}/vendor"
 FREETDS_DIR="#{VENDOR_DIR}/freetds"
-OPENSSL_DIR="#{VENDOR_DIR}/openssl"
+OPEN_SSL_DIR="#{VENDOR_DIR}/openssl"
+UNIX_ODBC_DIR="#{VENDOR_DIR}/unixodbc"
 
 def indent msg 
   puts "       #{msg}"
 end
 
 indent "Creating folders"
-result = `mkdir #{FREETDS_DIR} #{OPENSSL_DIR}`
+result = `mkdir #{FREETDS_DIR} #{OPEN_SSL_DIR} #{UNIX_ODBC_DIR}`
 
 indent "Downloading and extracting archives from #{S3BUCKET}..."
-result = `curl #{FREETDS_TGZ} -s -o - | tar -xz -C #{FREETDS_DIR} -f - `
+result = `curl #{FREE_TDS_TGZ} -s -o - | tar -xz -C #{FREETDS_DIR} -f - `
 
-raise "ERROR! #{$?}" unless $?.success?
+raise "Error while downloading or extracting FreeTDS! #{result} #{$?}" unless $?.success?
 
-result = `curl #{OPENSSL_TGZ} -s -o - | tar -xz -C #{OPENSSL_DIR} -f - `
+result = `curl #{UNIX_ODBC_TGZ} -s -o - | tar -xz -C #{UNIX_ODBC_DIR} -f - `
+
+raise "Error while downloading or extracting UnixODBC! #{result} #{$?}" unless $?.success?
+
+result = `curl #{OPEN_SSL_TGZ} -s -o - | tar -xz -C #{OPEN_SSL_DIR} -f - `
+
+raise "Error while downloading or extracting OpenSSL! #{result} #{$?}" unless $?.success?
 
 if $?.success?
   indent "Done."
-else
-  raise "ERROR! #{$?}"
 end
