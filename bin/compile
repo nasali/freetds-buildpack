@@ -6,7 +6,7 @@ puts "-----> Found a .freetds.conf"
 $stdout.sync = true
 
 S3BUCKET="https://s3.amazonaws.com/chameleon-heroku-assets"
-FREETDS_TGZ="#{S3BUCKET}/freetds.tar.gz"
+FREETDS_TGZ="#{S3BUCKET}/freetds-openssl.tar.gz"
 OPENSSL_TGZ="#{S3BUCKET}/openssl-1.0.1e.tar.gz"
 VENDOR_DIR="#{ARGV[0]}/vendor"
 FREETDS_DIR="#{VENDOR_DIR}/freetds"
