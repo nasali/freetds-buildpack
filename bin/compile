@@ -6,13 +6,11 @@ puts "-----> Found a .freetds.conf"
 $stdout.sync = true
 
 S3BUCKET="https://s3.amazonaws.com/chameleon-heroku-assets"
-FREE_TDS_TGZ="#{S3BUCKET}/freetds-openssl.tar.gz"
-OPEN_SSL_TGZ="#{S3BUCKET}/openssl-1.0.1e.tar.gz"
+FREE_TDS_TGZ="#{S3BUCKET}/freetds-ssl.tar.gz"
 UNIX_ODBC_TGZ="#{S3BUCKET}/unixodbc.tar.gz"
 
 VENDOR_DIR="#{ARGV[0]}/vendor"
 FREETDS_DIR="#{VENDOR_DIR}/freetds"
-OPEN_SSL_DIR="#{VENDOR_DIR}/openssl"
 UNIX_ODBC_DIR="#{VENDOR_DIR}/unixodbc"
 
 def indent msg 
@@ -30,10 +28,6 @@ raise "Error while downloading or extracting FreeTDS! #{result} #{$?}" unless $?
 result = `curl #{UNIX_ODBC_TGZ} -s -o - | tar -xz -C #{UNIX_ODBC_DIR} -f - `
 
 raise "Error while downloading or extracting UnixODBC! #{result} #{$?}" unless $?.success?
-
-result = `curl #{OPEN_SSL_TGZ} -s -o - | tar -xz -C #{OPEN_SSL_DIR} -f - `
-
-raise "Error while downloading or extracting OpenSSL! #{result} #{$?}" unless $?.success?
 
 if $?.success?
   indent "Done."
