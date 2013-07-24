@@ -18,7 +18,7 @@ def indent msg
 end
 
 indent "Creating folders"
-result = `mkdir #{FREETDS_DIR} #{OPEN_SSL_DIR} #{UNIX_ODBC_DIR}`
+result = `mkdir #{FREETDS_DIR} #{UNIX_ODBC_DIR}`
 
 indent "Downloading and extracting archives from #{S3BUCKET}..."
 result = `curl #{FREE_TDS_TGZ} -s -o - | tar -xz -C #{FREETDS_DIR} -f - `
